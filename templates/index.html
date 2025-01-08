@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+{%  load static %}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="icon" type="image/svg+xml" href="/static/icons/logo.png" />
+    <link rel="stylesheet" href="/static/css/style.css" />
+    <link rel="stylesheet" href="/static/css/reset.css" />
+
+    <title>Imlo lug`at</title>
+  </head>
+  <body>
+    <div class="main-container">
+      <header></header>
+
+      <div class="main-container__main">
+        <form>
+          <input name="soz" type="text" placeholder="So`z qidiring..." id="search" value="{{ soz }}" required />
+          <button>
+            <img src="{%  static 'icons/ico-search.png' %}" alt="seach-button-ico" />
+          </button>
+        </form>
+
+        <div class="answers">
+          <div class="main-container__main__correct-answers">
+            <ul style="list-style-image: url(/static/icons/correct-mark.png);">
+              <!--style="align-items: center" -->
+                 {% if correct%}
+                   {% if correct == "Soz tarkibida 'Xx' yoki 'Hh' mavjud emas!"%}
+                       <li> "Soz tarkibida 'Xx' yoki 'Hh' mavjud emas!"</li>
+                       {% elif correct == 'Omborda mavjud emas!'%}
+                       <li>'Omborda mavjud emas!'</li>
+                   {% else %}
+                        <li>{{ correct.word }}</li>
+                   {% endif %}
+                {% endif %}
+            </ul>
+          </div>
+          <div class="main-container__main__incorrect-answers">
+            <ul style="list-style-image: url(/static/icons/incorrect-mark.png);">
+                {% if incorrects %}
+                    {% if incorrects == 'Omborda mavjud emas!' %}
+                        <li>'Omborda mavjud emas!'</li>
+                        {% elif incorrects == "Soz tarkibida 'Xx' yoki 'Hh' mavjud emas!" %}
+                        <li>"Soz tarkibida 'Xx' yoki 'Hh' mavjud emas!"</li>
+                    {% else %}
+                        {% for incorrect in incorrects %}
+                          <li>{{ incorrect.word }}</li>
+                        {% endfor %}
+                    {% endif %}
+                {% endif %}
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <footer></footer>
+    </div>
+  </body>
+</html>
